@@ -2,3 +2,4 @@
 *.vcxproj*
 Debug/
 .vs/
+x64/

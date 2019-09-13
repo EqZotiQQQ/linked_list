@@ -8,10 +8,9 @@ LinkedList<T>::LinkedList()
 	first = last = nullptr;
 }
 template<class T>
-void LinkedList<T>::addElement(const T& data) {
+void LinkedList<T>::addElement(T& data) {
 	if (numberOfElements == 0) {
-		Node* current = new Node;
-		current.data = data;
+		Node* current = new Node(data, nullptr, nullptr);
 		first = current;
 		last = current;
 	}

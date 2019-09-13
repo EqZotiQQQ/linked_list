@@ -13,7 +13,7 @@
 	public:
 		LinkedList();
 		unsigned int getNumber();
-		void addElement(const T& data);
+		void addElement(T& data);
 		/*bool removeElement(int number);
 
 		template<class T>
