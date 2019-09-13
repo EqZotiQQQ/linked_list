@@ -1,6 +1,0 @@
-﻿  linkedList.cpp
-  main.cpp
-  Generating Code...
-main.obj : error LNK2019: unresolved external symbol "public: unsigned int __thiscall LinkedList<int>::getNumber(void)" (?getNumber@?$LinkedList@H@@QAEIXZ) referenced in function _main
-main.obj : error LNK2019: unresolved external symbol "public: void __thiscall LinkedList<int>::addElement(int const &)" (?addElement@?$LinkedList@H@@QAEXABH@Z) referenced in function _main
-E:\GitLab\linkedList\Debug\linkedList.exe : fatal error LNK1120: 2 unresolved externals
