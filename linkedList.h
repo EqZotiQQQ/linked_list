@@ -1,22 +1,8 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-
-
 //namespace linekdList {
-
-	template<class T>
-	struct Node {
-		T* data;
-		Node* next;
-		Node* prev;
-		Node(Node& next = nullptr, Node& prev = nullptr, T& data = nullptr) {
-			this->next = next;
-			this->prev = prev;
-			this->data = data;
-		}
-	};
-
+#include "Node.h"
 
 	template<class T>
 	class LinkedList {
@@ -25,11 +11,7 @@
 		Node<T>* first;
 		Node<T>* last;
 	public:
-		LinkedList()
-			: numberOfElements(0)
-		{
-			first = last = nullptr;
-		}
+		LinkedList();
 		unsigned int getNumber();
 		void addElement(const T& data);
 		/*bool removeElement(int number);

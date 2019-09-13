@@ -1,7 +1,12 @@
 #include "linkedList.h"
+#include "Node.h"
 
-
-
+template<class T>
+LinkedList<T>::LinkedList()
+	: numberOfElements(0)
+{
+	first = last = nullptr;
+}
 template<class T>
 void LinkedList<T>::addElement(const T& data) {
 	if (numberOfElements == 0) {

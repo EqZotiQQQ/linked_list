@@ -1,5 +1,6 @@
 #include <iostream>
 #include "linkedList.h"
+#include "Node.h"
 using namespace std;
 int main(int argc, char**argv) {
 	LinkedList<int> ll;
