@@ -16,6 +16,7 @@
 		unsigned int getNumber();
 		LinkedList<T>& pushback(T const& data);
 		LinkedList<T>& pushfront(T const& data);
+		LinkedList<T>& insertIn(T const& data, int num);
 		/*bool removeElement(int number);
 
 		template<class T>
