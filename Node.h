@@ -1,3 +1,5 @@
+#include <iostream>
+
 #ifndef NODE_H
 #define NODE_H
 
@@ -6,7 +8,9 @@ struct Node {
 	T data;
 	Node* next;
 	Node* prev;
-	Node(T& data, Node* next = nullptr, Node* prev = nullptr);
+
+
+	Node(T const & data, Node* next = nullptr, Node* prev = nullptr);
 	~Node();
 };
 

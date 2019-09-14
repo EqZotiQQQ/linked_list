@@ -1,3 +1,4 @@
+#include <iostream>
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
@@ -13,7 +14,8 @@
 	public:
 		LinkedList();
 		unsigned int getNumber();
-		void addElement(T& data);
+		LinkedList<T>& pushback(T const& data);
+		LinkedList<T>& pushfront(T const& data);
 		/*bool removeElement(int number);
 
 		template<class T>

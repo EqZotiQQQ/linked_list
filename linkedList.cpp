@@ -2,18 +2,44 @@
 #include "Node.h"
 
 template<class T>
-LinkedList<T>::LinkedList()
-	: numberOfElements(0)
-{
+LinkedList<T>::LinkedList() {
 	first = last = nullptr;
+	numberOfElements = 0;
 }
+
 template<class T>
-void LinkedList<T>::addElement(T& data) {
+LinkedList<T>& LinkedList<T>::pushback(T const & data) {
 	if (numberOfElements == 0) {
-		Node* current = new Node(data, nullptr, nullptr);
+		Node<T>* current = new Node<T>(data, nullptr, nullptr);
 		first = current;
 		last = current;
+		numberOfElements++;
+	} else if (numberOfElements > 0) {
+		Node<T>* current = new Node<T>(data, nullptr, last);
+		last->next = current;
+		last = current;
+		numberOfElements++;
 	}
+	return *this;
+}
+
+template<class T>
+LinkedList<T>& LinkedList<T>::pushfront(T const& data) {
+	if (numberOfElements == 0) {
+		Node<T>* current = new Node<T>(data, nullptr, nullptr);
+		first = current;
+		last = current;
+		numberOfElements++;
+	}
+	else if (numberOfElements > 0) {
+		Node<T>* current = new Node<T>(data, first, nullptr);
+		first->prev= current;
+		first = current;
+		numberOfElements++;
+	}
+
+
+	return *this;
 }
 
 template<class T>
