@@ -16,16 +16,10 @@ unsigned int LinkedList<T>::getNumber() {
 template<class T>
 LinkedList<T>& LinkedList<T>::pushback(T const& data) {
 	if (numberOfElements == 0) {
-		Node<T>* current = new Node<T>(data, nullptr, nullptr);
-		first = current;
-		last = current;
-		numberOfElements++;
+		Node<T>* current = addIntoClearList(data);
 	}
 	else if (numberOfElements > 0) {
-		Node<T>* current = new Node<T>(data, nullptr, last);
-		last->next = current;
-		last = current;
-		numberOfElements++;
+		Node<T>* current = addLastElement(data);
 	}
 	return *this;
 }
@@ -33,16 +27,10 @@ LinkedList<T>& LinkedList<T>::pushback(T const& data) {
 template<class T>
 LinkedList<T>& LinkedList<T>::pushfront(T const& data) {
 	if (numberOfElements == 0) {
-		Node<T>* current = new Node<T>(data, nullptr, nullptr);
-		first = current;
-		last = current;
-		numberOfElements++;
+		Node<T>* current = addIntoClearList(data);
 	}
 	else if (numberOfElements > 0) {
-		Node<T>* current = new Node<T>(data, first, nullptr);
-		first->prev = current;
-		first = current;
-		numberOfElements++;
+		Node<T>* current = addFirstBegin(data);
 	}
 	return *this;
 }
@@ -50,22 +38,13 @@ LinkedList<T>& LinkedList<T>::pushfront(T const& data) {
 template<class T>
 LinkedList<T>& LinkedList<T>::insertIn(T const& data, int number) {
 	if (numberOfElements == 0) {
-		Node<T>* current = new Node<T>(data, nullptr, nullptr);
-		first = current;
-		last = current;
-		numberOfElements++;
+		Node<T>* current = addIntoClearList(data);
 	}
 	else if (number >= numberOfElements) {
-		Node<T>* current = new Node<T>(data, nullptr, last);
-		last->next = current;
-		last = current;
-		numberOfElements++;
+		Node<T>* current = addLastElement(data);
 	}
 	else if (number <= 0) {
-		Node<T>* current = new Node<T>(data, first, nullptr);
-		first->prev = current;
-		first = current;
-		numberOfElements++;
+		Node<T>* current = addFirstBegin(data);
 	}
 	else {
 		Node<T>* afterElem = first;
@@ -123,14 +102,33 @@ void LinkedList<T>::printList() {
 	}
 }
 
+template<class T>
+Node<T>* LinkedList<T>::addIntoClearList(T const& data) {
+	Node<T>* current = new Node<T>(data, nullptr, nullptr);
+	first = current;
+	last = current;
+	numberOfElements++;
+	return current;
+}
 
+template<class T>
+Node<T>* LinkedList<T>::addLastElement(T const& data) {
+	Node<T>* current = new Node<T>(data, nullptr, last);
+	last->next = current;
+	last = current;
+	numberOfElements++;
+	return current;
+}
 
+template<class T>
+Node<T>* LinkedList<T>::addFirstBegin(T const& data) {
 
-
-
-
-
-
+	Node<T>* current = new Node<T>(data, first, nullptr);
+	first->prev = current;
+	first = current;
+	numberOfElements++;
+	return current;
+}
 
 
 

@@ -11,6 +11,10 @@ private:
 	int numberOfElements;
 	Node<T>* first;
 	Node<T>* last;
+private:
+	Node<T>* addIntoClearList(T const& data);
+	Node<T>* addLastElement(T const& data);
+	Node<T>* addFirstBegin(T const& data);
 public:
 	LinkedList();
 	unsigned int getNumber();
