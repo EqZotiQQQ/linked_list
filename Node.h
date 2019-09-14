@@ -10,7 +10,7 @@ struct Node {
 	Node* prev;
 
 
-	Node(T const & data, Node* next = nullptr, Node* prev = nullptr);
+	Node(T const& data, Node* next = nullptr, Node* prev = nullptr);
 	~Node();
 };
 

@@ -1,7 +1,7 @@
-#include "Node.h"
+#include "node.h"
 
 template<class T>
-Node<T>::Node(T const & data, Node* next, Node* prev) {
+Node<T>::Node(T const& data, Node* next, Node* prev) {
 	this->next = next;
 	this->prev = prev;
 	this->data = data;
