@@ -18,6 +18,7 @@ public:
 	LinkedList<T>& pushfront(T const& data);
 	LinkedList<T>& insertIn(T const& data, int number);
 	bool removeElement(int number);
+	void printList();
 
 	/*TODO
 	template<class T>

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "linkedList.h"
 #include "Node.h"
 
@@ -113,7 +114,14 @@ bool LinkedList<T>::removeElement(int number) {
 	return true;
 }
 
-
+template<class T>
+void LinkedList<T>::printList() {
+	Node<T>* node = first;
+	for (int i = 0; i < numberOfElements; i++) {
+		std::cout << node->data << std::endl;
+		node = node->next;
+	}
+}
 
 
 
