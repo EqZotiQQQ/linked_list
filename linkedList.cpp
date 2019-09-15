@@ -4,60 +4,60 @@
 
 template<class T>
 LinkedList<T>::LinkedList() {
-	first = last = nullptr;
-	numberOfElements = 0;
+	head = tail = nullptr;
+	size = 0;
 }
 
 template<class T>
 LinkedList<T>::~LinkedList() {
-	while (numberOfElements > 0) {
+	while (size > 0) {
 		this->popback();
 	}
 
-	std::cout << "SDASDs" << std::endl;
+	std::cout << "destructor" << std::endl;
 }
 
 template<class T>
 unsigned int LinkedList<T>::getNumber() {
-	return numberOfElements;
+	return size;
 }
 
 template<class T>
 LinkedList<T>& LinkedList<T>::pushback(T const& data) {
-	if (numberOfElements == 0) {
-		Node<T>* current = addIntoClearList(data);
+	if (size == 0) {
+		Node<T>* current = addIntoEmptyList(data);
 	}
-	else if (numberOfElements > 0) {
-		Node<T>* current = addLastElement(data);
+	else if (size > 0) {
+		Node<T>* current = addIntoTail(data);
 	}
 	return *this;
 }
 
 template<class T>
 LinkedList<T>& LinkedList<T>::pushfront(T const& data) {
-	if (numberOfElements == 0) {
-		Node<T>* current = addIntoClearList(data);
+	if (size == 0) {
+		Node<T>* current = addIntoEmptyList(data);
 	}
-	else if (numberOfElements > 0) {
-		Node<T>* current = addFirstBegin(data);
+	else if (size > 0) {
+		Node<T>* current = addIntoHead(data);
 	}
 	return *this;
 }
 
 template<class T>
 LinkedList<T>& LinkedList<T>::insertIn(T const& data, int number) {
-	if (numberOfElements == 0) {
-		Node<T>* current = addIntoClearList(data);
+	if (size == 0) {
+		Node<T>* current = addIntoEmptyList(data);
 	}
-	else if (number >= numberOfElements) {
-		Node<T>* current = addLastElement(data);
+	else if (number >= size) {
+		Node<T>* current = addIntoTail(data);
 	}
 	else if (number <= 0) {
-		Node<T>* current = addFirstBegin(data);
+		Node<T>* current = addIntoHead(data);
 	}
 	else {
-		Node<T>* afterElem = first;
-		Node<T>* beforeCurrent = first;
+		Node<T>* afterElem = head;
+		Node<T>* beforeCurrent = head;
 		for (int i = 0; i < number; i++) {
 			afterElem = afterElem->next;
 		}
@@ -65,7 +65,7 @@ LinkedList<T>& LinkedList<T>::insertIn(T const& data, int number) {
 		Node<T>* current = new Node<T>(data, afterElem, beforeCurrent);
 		afterElem->prev = current;
 		beforeCurrent->next = current;
-		numberOfElements++;
+		size++;
 	}
 	return *this;
 }
@@ -73,79 +73,83 @@ LinkedList<T>& LinkedList<T>::insertIn(T const& data, int number) {
 template<class T>
 LinkedList<T>& LinkedList<T>::removeElement(int number) {
 
-	if (number < 0 || number > numberOfElements) {
+	if (number < 0 || number > size) {
+//TODO exception
 		return *this;
 	}
-	if (numberOfElements == 1) {
-		delete last;
-		last = first = nullptr;
-		numberOfElements--;
+	if (size == 1) {
+		delete tail;
+		tail = head = nullptr;
+		size--;
 		return *this;
 	}
-	Node<T>* removableElem;
+	Node<T>* removable;
 	if (number == 0) {
-		removableElem = first;
-		Node<T>* afterRemovable = first->next;
+		removable = head;
+		Node<T>* afterRemovable = head->next;
 		afterRemovable->prev = nullptr;
 	}
-	else if (number == numberOfElements) {
-		removableElem = last;
-		Node<T>* beforeRemovable = last->prev;
+	else if (number == size) {
+		removable = tail;
+		Node<T>* beforeRemovable = tail->prev;
 		beforeRemovable->next = nullptr;
 	}
 	else {
-		removableElem = first;
+		removable = head;
 		for (int i = 0; i < number; i++) {
-			removableElem = removableElem->next;
+			removable = removable->next;
 		}
-		Node<T>* beforeCurrent = removableElem->prev;
-		Node<T>* afterElem = removableElem->next;
+		Node<T>* beforeCurrent = removable->prev;
+		Node<T>* afterElem = removable->next;
 		beforeCurrent->next = afterElem;
 		afterElem->prev = beforeCurrent;
 	}
-	numberOfElements--;
-	delete removableElem;
+	size--;
+	delete removable;
+	removable = nullptr;
 	return *this;
 }
 
 template<class T>
 LinkedList<T>& LinkedList<T>::popfront() {
-	if (numberOfElements == 1) {
-		delete last;
-		last = first = nullptr;
-		numberOfElements--;
+	if (size == 1) {
+		delete tail;
+		tail = head = nullptr;
+		size--;
 		return *this;
 	}
-	Node<T>* removable = first;
-	Node<T>* afterRemovable = first->next;
+	Node<T>* removable = head;
+	Node<T>* afterRemovable = head->next;
 	afterRemovable->prev = nullptr;
-	first = afterRemovable;
+	head = afterRemovable;
 	delete removable;
-	numberOfElements--;
+	removable = nullptr;
+	size--;
 	return *this;
 }
 
 template<class T>
 LinkedList<T>& LinkedList<T>::popback() {
-	if (numberOfElements == 1) {
-		delete last;
-		last = first = nullptr;
-		numberOfElements--;
+	if (size == 1) {
+		delete tail;
+		tail = head = nullptr;
+		size--;
 		return *this;
 	}
-	Node<T>* removable = last;
-	Node<T>* beforeRemovable = last->prev;
+	Node<T>* removable = tail;
+	Node<T>* beforeRemovable = tail->prev;
 	beforeRemovable->next = nullptr;
-	last = beforeRemovable;
+	tail = beforeRemovable;
 	delete removable;
-	numberOfElements--;
+	removable = nullptr;
+	size--;
 	return *this;
 }
 
 template<class T>
 void LinkedList<T>::printList() {
-	Node<T>* node = first;
-	for (int i = 0; i < numberOfElements; i++) {
+	Node<T>* node = head;
+	for (int i = 0; i < size; i++) {
 		std::cout << node->data << std::endl;
 		node = node->next;
 	}
@@ -153,7 +157,7 @@ void LinkedList<T>::printList() {
 
 template<class T>
 T& LinkedList<T>::getElement(int num) {
-	Node<T>* returnableNode = first;
+	Node<T>* returnableNode = head;
 	for (int i = 0; i < num; i++) {
 		returnableNode = returnableNode->next;
 	}
@@ -166,29 +170,29 @@ T& LinkedList<T>::getElement(int num) {
 //////////////////////////////////////////////////
 
 template<class T>
-Node<T>* LinkedList<T>::addIntoClearList(T const& data) {
-	Node<T>* current = new Node<T>(data, nullptr, nullptr);
-	first = current;
-	last = current;
-	numberOfElements++;
+Node<T>* LinkedList<T>::addIntoEmptyList(T const& data) {
+	Node<T>* newNode = new Node<T>(data, nullptr, nullptr);
+	head = newNode;
+	tail = newNode;
+	size++;
+	return newNode;
+}
+
+template<class T>
+Node<T>* LinkedList<T>::addIntoTail(T const& data) {
+	Node<T>* current = new Node<T>(data, nullptr, tail);
+	tail->next = current;
+	tail = current;
+	size++;
 	return current;
 }
 
 template<class T>
-Node<T>* LinkedList<T>::addLastElement(T const& data) {
-	Node<T>* current = new Node<T>(data, nullptr, last);
-	last->next = current;
-	last = current;
-	numberOfElements++;
-	return current;
-}
+Node<T>* LinkedList<T>::addIntoHead(T const& data) {
 
-template<class T>
-Node<T>* LinkedList<T>::addFirstBegin(T const& data) {
-
-	Node<T>* current = new Node<T>(data, first, nullptr);
-	first->prev = current;
-	first = current;
-	numberOfElements++;
+	Node<T>* current = new Node<T>(data, head, nullptr);
+	head->prev = current;
+	head = current;
+	size++;
 	return current;
 }

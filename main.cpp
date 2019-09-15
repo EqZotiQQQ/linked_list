@@ -6,24 +6,9 @@
 using namespace std;
 int main(int argc, char** argv) {
 	LinkedList<int> ll;
-	ll.pushback(21).pushback(10);
-	ll.insertIn(15, 1);
-	cout << endl;
+	ll.pushback(0);
 	ll.printList();
-	ll.removeElement(1);
-	cout << endl;
+	ll.pushback(1).pushback(2);
 	ll.printList();
-	ll.pushback(100);
-	cout << endl;
-	ll.printList();
-	ll.pushfront(100);
-	cout << endl;
-	ll.printList();
-	ll.popback().popback();
-	cout << "after popback" << endl;
-	ll.printList();
-	cout << endl;
-	cout << ll.getElement(1) << endl;
-	cout << "end" << endl;
 	return 0;
 }
