@@ -7,33 +7,41 @@
 
 template<class T>
 class LinkedList {
-private:
+protected:
 	int size;
 	Node<T>* head;
 	Node<T>* tail;
-private:
+protected:
 	Node<T>* addIntoEmptyList(T const& data);
 	Node<T>* addIntoTail(T const& data);
 	Node<T>* addIntoHead(T const& data);
 public:
 	LinkedList();
-	unsigned int getNumber();
-	LinkedList<T>& pushback(T const& data);
-	LinkedList<T>& pushfront(T const& data);
-	LinkedList<T>& insertIn(T const& data, int number);
-	LinkedList<T>& removeElement(int number);
-	void printList();
-	LinkedList<T>& popfront();
-	LinkedList<T>& popback();
-	T& getElement(int num);
-	~LinkedList();
+	virtual unsigned int getNumber();
+	virtual LinkedList<T>& pushback(T const& data);
+	virtual LinkedList<T>& pushfront(T const& data);
+	virtual LinkedList<T>& insertIn(T const& data, int number);
+	virtual LinkedList<T>& removeElement(int number);
+	virtual void printList();
+	virtual LinkedList<T>& popfront();
+	virtual LinkedList<T>& popback();
+	virtual T& getElement(int num);
+	virtual ~LinkedList();
 	/*TODO
+
+	add mechanism which will not allow to remove elements
+	when list already clear
+
 	probable need to create checks for == nullptr of head/tail
 	add isIn
+
 	insertIn and removeElement should search from two sides,
 	to increase speed of access to elements.
+
 	add notIsIn
+
 	add operator[]
+
 	probably should be added instruments to use it like array
 	*/
 };

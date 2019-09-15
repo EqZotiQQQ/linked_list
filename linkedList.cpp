@@ -13,7 +13,6 @@ LinkedList<T>::~LinkedList() {
 	while (size > 0) {
 		this->popback();
 	}
-
 	std::cout << "destructor" << std::endl;
 }
 
@@ -57,14 +56,14 @@ LinkedList<T>& LinkedList<T>::insertIn(T const& data, int number) {
 	}
 	else {
 		Node<T>* afterElem = head;
-		Node<T>* beforeCurrent = head;
+		Node<T>* beforeElem = head;
 		for (int i = 0; i < number; i++) {
 			afterElem = afterElem->next;
 		}
-		beforeCurrent = afterElem->prev;
-		Node<T>* current = new Node<T>(data, afterElem, beforeCurrent);
+		beforeElem = afterElem->prev;
+		Node<T>* current = new Node<T>(data, afterElem, beforeElem);
 		afterElem->prev = current;
-		beforeCurrent->next = current;
+		beforeElem->next = current;
 		size++;
 	}
 	return *this;
