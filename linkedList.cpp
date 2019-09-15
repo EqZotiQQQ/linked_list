@@ -9,6 +9,15 @@ LinkedList<T>::LinkedList() {
 }
 
 template<class T>
+LinkedList<T>::~LinkedList() {
+	while (numberOfElements > 0) {
+		this->popback();
+	}
+
+	std::cout << "SDASDs" << std::endl;
+}
+
+template<class T>
 unsigned int LinkedList<T>::getNumber() {
 	return numberOfElements;
 }
@@ -51,9 +60,8 @@ LinkedList<T>& LinkedList<T>::insertIn(T const& data, int number) {
 		Node<T>* beforeCurrent = first;
 		for (int i = 0; i < number; i++) {
 			afterElem = afterElem->next;
-			beforeCurrent = beforeCurrent->next;
 		}
-		beforeCurrent = beforeCurrent->prev;
+		beforeCurrent = afterElem->prev;
 		Node<T>* current = new Node<T>(data, afterElem, beforeCurrent);
 		afterElem->prev = current;
 		beforeCurrent->next = current;
@@ -63,9 +71,16 @@ LinkedList<T>& LinkedList<T>::insertIn(T const& data, int number) {
 }
 
 template<class T>
-bool LinkedList<T>::removeElement(int number) {
+LinkedList<T>& LinkedList<T>::removeElement(int number) {
+
 	if (number < 0 || number > numberOfElements) {
-		return false;
+		return *this;
+	}
+	if (numberOfElements == 1) {
+		delete last;
+		last = first = nullptr;
+		numberOfElements--;
+		return *this;
 	}
 	Node<T>* removableElem;
 	if (number == 0) {
@@ -90,7 +105,41 @@ bool LinkedList<T>::removeElement(int number) {
 	}
 	numberOfElements--;
 	delete removableElem;
-	return true;
+	return *this;
+}
+
+template<class T>
+LinkedList<T>& LinkedList<T>::popfront() {
+	if (numberOfElements == 1) {
+		delete last;
+		last = first = nullptr;
+		numberOfElements--;
+		return *this;
+	}
+	Node<T>* removable = first;
+	Node<T>* afterRemovable = first->next;
+	afterRemovable->prev = nullptr;
+	first = afterRemovable;
+	delete removable;
+	numberOfElements--;
+	return *this;
+}
+
+template<class T>
+LinkedList<T>& LinkedList<T>::popback() {
+	if (numberOfElements == 1) {
+		delete last;
+		last = first = nullptr;
+		numberOfElements--;
+		return *this;
+	}
+	Node<T>* removable = last;
+	Node<T>* beforeRemovable = last->prev;
+	beforeRemovable->next = nullptr;
+	last = beforeRemovable;
+	delete removable;
+	numberOfElements--;
+	return *this;
 }
 
 template<class T>
@@ -101,6 +150,20 @@ void LinkedList<T>::printList() {
 		node = node->next;
 	}
 }
+
+template<class T>
+T& LinkedList<T>::getElement(int num) {
+	Node<T>* returnableNode = first;
+	for (int i = 0; i < num; i++) {
+		returnableNode = returnableNode->next;
+	}
+	return returnableNode->data;
+}
+
+
+//////////////////////////////////////////////////
+/*		private functions						*/
+//////////////////////////////////////////////////
 
 template<class T>
 Node<T>* LinkedList<T>::addIntoClearList(T const& data) {
@@ -129,18 +192,3 @@ Node<T>* LinkedList<T>::addFirstBegin(T const& data) {
 	numberOfElements++;
 	return current;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

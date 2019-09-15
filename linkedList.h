@@ -21,19 +21,19 @@ public:
 	LinkedList<T>& pushback(T const& data);
 	LinkedList<T>& pushfront(T const& data);
 	LinkedList<T>& insertIn(T const& data, int number);
-	bool removeElement(int number);
+	LinkedList<T>& removeElement(int number);
 	void printList();
-
-	/*TODO
-	template<class T>
-	bool removeElement(T& data);
-
-	template<class T>
+	LinkedList<T>& popfront();
+	LinkedList<T>& popback();
 	T& getElement(int num);
-
-	template<class T>
-	int getElemNumber(T& data);
-	~LinkedList();*/
+	~LinkedList();
+	/*TODO
+	add destructor
+	add isIn
+	add notIsIn
+	add operator[]
+	probably should be added instruments to use it like array
+	*/
 };
 
 //} //namespace LinkedList

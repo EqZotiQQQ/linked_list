@@ -19,5 +19,11 @@ int main(int argc, char** argv) {
 	ll.pushfront(100);
 	cout << endl;
 	ll.printList();
+	ll.popback().popback();
+	cout << "after popback" << endl;
+	ll.printList();
+	cout << endl;
+	cout << ll.getElement(1) << endl;
+	cout << "end" << endl;
 	return 0;
 }
