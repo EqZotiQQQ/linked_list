@@ -1,6 +1,7 @@
 #include <iostream>
-#include "linkedList.h"
-#include "Node.h"
+#include <exception>
+#include "../headers/linkedList.h"
+#include "../headers/Node.h"
 
 template<class T>
 LinkedList<T>::LinkedList() {
@@ -73,7 +74,6 @@ template<class T>
 LinkedList<T>& LinkedList<T>::removeElement(int number) {
 
     if (number < 0 || number > size) {
-//TODO exception
         return *this;
     }
     if (size == 1) {
@@ -111,12 +111,17 @@ LinkedList<T>& LinkedList<T>::removeElement(int number) {
 
 template<class T>
 LinkedList<T>& LinkedList<T>::popfront() {
+    if(size == 0) {
+        return *this;
+    }
+
     if (size == 1) {
         delete tail;
         tail = head = nullptr;
         size--;
         return *this;
     }
+
     Node<T>* removable = head;
     Node<T>* afterRemovable = head->next;
     afterRemovable->prev = nullptr;
@@ -129,12 +134,17 @@ LinkedList<T>& LinkedList<T>::popfront() {
 
 template<class T>
 LinkedList<T>& LinkedList<T>::popback() {
+    if(size == 0) {
+        return *this;
+    }
+
     if (size == 1) {
         delete tail;
         tail = head = nullptr;
         size--;
         return *this;
     }
+
     Node<T>* removable = tail;
     Node<T>* beforeRemovable = tail->prev;
     beforeRemovable->next = nullptr;
@@ -147,6 +157,9 @@ LinkedList<T>& LinkedList<T>::popback() {
 
 template<class T>
 void LinkedList<T>::printList() {
+    if(size == 0) {
+        return;
+    }
     Node<T>* node = head;
     for (int i = 0; i < size; i++) {
         std::cout << node->data << std::endl;
@@ -156,6 +169,9 @@ void LinkedList<T>::printList() {
 
 template<class T>
 T& LinkedList<T>::getElement(int num) {
+    if(num > size || num < 0) {
+        throw "getElement: you have tried to get access to unexisted element";
+    }
     Node<T>* returnableNode = head;
     for (int i = 0; i < num; i++) {
         returnableNode = returnableNode->next;

@@ -1,6 +1,6 @@
 #include <iostream>
-#include "linkedList.h"
-#include "node.h"
+#include "headers/linkedList.h"
+#include "headers/node.h"
 #include "linkedList.cpp"
 #include "node.cpp"
 using namespace std;
@@ -21,5 +21,10 @@ int main(int argc, char** argv) {
     ll.popfront();
     ll.printList();
     cout << endl;
+    try {
+       // ll.getElement(33);
+    } catch (exception e) {
+        e.what();
+    }
     return 0;
 }

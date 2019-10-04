@@ -1,4 +1,4 @@
-#include "node.h"
+#include "../headers/node.h"
 
 template<class T>
 Node<T>::Node(T const& data, Node* next, Node* prev) {
